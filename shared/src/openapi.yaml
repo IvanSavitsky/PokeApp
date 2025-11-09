@@ -1,0 +1,49 @@
+openapi: 3.0.0
+info:
+  title: API
+  version: v1
+servers:
+  - url: https://api.chucknorris.io
+    description: Production API
+paths:
+  /jokes/random:
+    get:
+      tags:
+        - Jokes
+      summary: get random joke
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Joke'
+components:
+  schemas:
+    Joke:
+      type: object
+      required:
+        - id
+        - value
+        - url
+      properties:
+        categories:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+          format: date-time
+        icon_url:
+          type: string
+          format: uri
+        id:
+          type: string
+        updated_at:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+        value:
+          type: string

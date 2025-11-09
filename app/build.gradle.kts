@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
 
     // Kotlin serialization plugin for type safe routes and navigation arguments
-    kotlin("plugin.serialization") version "2.0.21"
+    //kotlin("plugin.serialization") version "2.2.10-2.0.2"
     alias(libs.plugins.compose.compiler)
     id("com.google.devtools.ksp")
 }
@@ -40,6 +40,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -80,7 +81,7 @@ dependencies {
 
     implementation(libs.androidx.activity.ktx)
 
-    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinSerialization)
 
 
     val composeBom = platform("androidx.compose:compose-bom:2025.05.00")
@@ -123,4 +124,6 @@ dependencies {
     implementation("io.insert-koin:koin-android:$koin_version")
     implementation("io.insert-koin:koin-androidx-compose:$koin_version")
     implementation("io.insert-koin:koin-androidx-compose-navigation:$koin_version")
+
+    implementation(project(":shared"))
 }
