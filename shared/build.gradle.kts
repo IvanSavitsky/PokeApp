@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.android.lint)
     id("dev.icerock.mobile.multiplatform-network-generator")
-    //id("org.jetbrains.kotlin.plugin.serialization")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -59,16 +59,18 @@ kotlin {
     // common to share sources between related targets.
     // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
-        val ktorVersion = "3.3.2"
+        val ktorVersion = "1.6.8"
         commonMain {
             dependencies {
-                implementation(libs.kotlin.stdlib)
                 api("dev.icerock.moko:mvvm-core:0.13.0")
                 api("dev.icerock.moko:mvvm-livedata:0.13.0")
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-logging:$ktorVersion")
-                implementation("dev.icerock.moko:network:0.17.0")
-                implementation(libs.kotlinSerialization)
+                implementation("dev.icerock.moko:network:0.21.2")
+                implementation("dev.icerock.moko:network-engine:0.21.2") // configured HttpClientEngine
+                implementation("dev.icerock.moko:network-bignum:0.21.2") // kbignum serializer
+                implementation("dev.icerock.moko:network-errors:0.21.2") // moko-errors integration
+
                 // Add KMP dependencies here
             }
         }
@@ -81,6 +83,7 @@ kotlin {
 
         androidMain {
             dependencies {
+                implementation("io.ktor:ktor-client-okhttp:${ktorVersion}")
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.

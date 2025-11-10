@@ -5,7 +5,7 @@ plugins {
     // Kotlin serialization plugin for type safe routes and navigation arguments
     //kotlin("plugin.serialization") version "2.2.10-2.0.2"
     alias(libs.plugins.compose.compiler)
-    id("com.google.devtools.ksp")
+    //id("com.google.devtools.ksp")
 }
 
 android {
@@ -44,9 +44,9 @@ android {
     }
 }
 
-ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
-}
+//ksp {
+//    arg("room.schemaLocation", "$projectDir/schemas")
+//}
 
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
@@ -75,7 +75,7 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
 
     implementation(libs.androidx.room.ktx)
-    ksp(libs.androidx.room.compiler.v250)
+    //ksp(libs.androidx.room.compiler.v250)
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 

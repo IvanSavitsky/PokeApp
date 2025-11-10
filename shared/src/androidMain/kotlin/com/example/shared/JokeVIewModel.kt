@@ -6,7 +6,8 @@ import dev.icerock.moko.mvvm.viewmodel.ViewModel
 import dev.icerock.moko.network.generated.apis.JokesApi
 import dev.icerock.moko.network.generated.models.Joke
 import io.ktor.client.HttpClient
-import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.features.logging.Logging
+
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
@@ -15,7 +16,7 @@ class JokeViewModel : ViewModel() {
     val jokeText: LiveData<String> get() = _jokeText
 
     private val httpClient: HttpClient = HttpClient {
-        install(Logging)
+        //install(Logging)
     }
     private val jokesApi: JokesApi = JokesApi(
         json = Json.Default,
